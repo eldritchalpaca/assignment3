@@ -68,6 +68,21 @@ app.post("/insert", async (req, res) => {
     }
 });
 
+app.put("/update", async (req, res) => {
+    console.log(req.body);
+    const p_id = req.body._id;
+    const pprice = req.body.price;
+
+    try {
+        // await formData.save();
+        await Product.findOneAndUpdate({_id: p_id}, {price: pprice}, null, null)
+        const messageResponse = { message: `Product ${p_id} updated correctly to ${pprice}` };
+        res.send(JSON.stringify(messageResponse));
+    } catch (err) {
+        console.log("Error while adding a new product:" + err);
+    }
+});
+
 app.delete("/delete", async (req, res) => {
     console.log("Delete :", req.body);
     try {
@@ -81,5 +96,3 @@ app.delete("/delete", async (req, res) => {
         console.log("Error while deleting :" + p_id + " " + err);
     }
 });
-
-//hello testing

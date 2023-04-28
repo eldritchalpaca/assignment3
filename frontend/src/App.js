@@ -4,7 +4,7 @@ function App() {
     const [viewer1, setViewer1] = useState(false);
     const [viewer2, setViewer2] = useState(false);
     const [viewer4, setViewer4] = useState(false);
-    const [oneProduct, setOneProduct] = useState([]);   
+    const [oneProduct, setOneProduct] = useState([]);
     const [checked4, setChecked4] = useState(false);
     const [index, setIndex] = useState(0);
 
@@ -44,6 +44,20 @@ function App() {
         image: "http://127.0.0.1:4000/images/",
         rating: { rate: 0.0, count: 0 },
     });
+
+    const [updateProduct, setUpdateProduct] = useState({
+        _id: 0,
+        price: 0.0,
+    });
+
+    function handleUpdateChange(evt) {
+        const value = evt.target.value;
+        if (evt.target.name === "_id") {
+            setUpdateProduct({...updateProduct, _id: value });
+        } else if (evt.target.name === "price") {
+            setUpdateProduct({ ...updateProduct, price: value });
+        }
+    }
 
     function handleChange(evt) {
         const value = evt.target.value;
@@ -91,9 +105,9 @@ function App() {
             });
     }
 
-    useEffect(() => {
+/*     useEffect(() => {
         getAllProducts();
-    }, [checked4]);
+    }, [checked4]); */
 
     function getOneByOneProductNext() {
         if (product.length > 0) {
@@ -111,6 +125,26 @@ function App() {
             if (product.length > 0) setViewer4(true);
             else setViewer4(false);
         }
+    }
+
+    function updateOneProduct(e) {
+        e.preventDefault();
+        //console.log(e.target.value);
+        fetch("http://localhost:4000/update", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updateProduct),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Update product completed");
+                console.log(data);
+                if (data) {
+                    //const keys = Object.keys(data);
+                    const value = Object.values(data);
+                    alert(value);
+                }
+            });
     }
 
     function deleteOneProduct(deleteid) {
@@ -131,6 +165,10 @@ function App() {
                 }
             });
         setChecked4(!checked4);
+        if (viewer1) {
+            getAllProducts();
+            getAllProducts();
+        }
         getOneByOneProductNext();
     }
 
@@ -150,7 +188,7 @@ function App() {
             setViewer2(!viewer2);
         } else {
             console.log("Wrong number of Product id.");
-            //setViewer2(false);
+            setViewer2(false);
         }
     }
 
@@ -191,6 +229,16 @@ function App() {
                     <input type="number" placeholder="rate?" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
                     <input type="number" placeholder="count?" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
                     <button type="submit" onClick={handleOnSubmit}>
+                        submit
+                    </button>
+                </form>
+            </div>
+            <div>
+                <h3>Update a product's price:</h3>
+                <form action="">
+                    <input type="number" placeholder="id?" name="_id" value={updateProduct._id} onChange={handleUpdateChange} />
+                    <input type="number" placeholder="new price?" name="price" value={updateProduct.price} onChange={handleUpdateChange} />
+                    <button type="submit" onClick={updateOneProduct}>
                         submit
                     </button>
                 </form>
