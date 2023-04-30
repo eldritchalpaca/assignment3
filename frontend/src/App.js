@@ -255,6 +255,7 @@ function App() {
                 </div>
                 <div>
                     <h3 class="cart-delete">Delete one product:</h3>
+                    <label name="acceptdelete">Check to complete action: </label>
                     <input type="checkbox" id="acceptdelete" name="acceptdelete" checked={checked4}
                         onChange={(e) => setChecked4(!checked4)} />
                     <button class="button-background" onClick={() => getOneByOneProductPrev()}>Prev</button>
