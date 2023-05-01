@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import './App.css';
 function App() {
     const [product, setProduct] = useState([]);
     const [viewer1, setViewer1] = useState(false);
@@ -7,7 +8,7 @@ function App() {
     const [oneProduct, setOneProduct] = useState([]);
     const [checked4, setChecked4] = useState(false);
     const [index, setIndex] = useState(0);
-
+    const [inCredits, creditState] = useState(false);
 
     useEffect(() => {
         getAllProducts();
@@ -29,8 +30,10 @@ function App() {
             <img src={el.image} width={30} /> <br />
             Title: {el.title} <br />
             Category: {el.category} <br />
-            Price: {el.price} <br />
-            Rate :{el.rating.rate} and Count:{el.rating.count} <br />
+            Description: {el.description} <br />
+            Price: ${el.price} <br />
+            Rating: {el.rating.rate} <br />
+            Count: {el.rating.count} <br /> <br />
         </div>
     ));
 
@@ -49,6 +52,10 @@ function App() {
         _id: 0,
         price: 0.0,
     });
+
+    function toggleShopAndCredits() {
+        creditState(!inCredits);
+    }
 
     function handleUpdateChange(evt) {
         const value = evt.target.value;
@@ -197,71 +204,98 @@ function App() {
             <img src={el.image} width={30} /> <br />
             Title: {el.title} <br />
             Category: {el.category} <br />
+            Description: {el.description} <br />
             Price: {el.price} <br />
-            Rate :{el.rating.rate} and Count:{el.rating.count} <br />
+            Rating :{el.rating.rate} <br />
+            Count: {el.rating.count} <br /> <br />
         </div>
     ));
 
 
     return (
         <div>
-            <div>
-                <h3>Catalog of Products</h3>
-                <button onClick={() => getAllProducts()}>Show All products</button>
-                <input type="text" id="message" name="message" placeholder="id" onChange={(e) => getOneProduct(e.target.value)} />
-                <h3>Show all available Products.</h3>
-                <hr></hr>
-                {viewer1 && <div>Products {showAllItems}</div>}
-                <hr></hr>
-            </div>
-            <div><h3>Show one Product by Id:</h3>
-                {viewer2 && <div>Product: {showOneItem}</div>}
-            </div>
-            <div>
-                <h3>Add a new product :</h3>
-                <form action="">
-                    <input type="number" placeholder="id?" name="_id" value={addNewProduct._id} onChange={handleChange} />
-                    <input type="text" placeholder="title?" name="title" value={addNewProduct.title} onChange={handleChange} />
-                    <input type="number" placeholder="price?" name="price" value={addNewProduct.price} onChange={handleChange} />
-                    <input type="text" placeholder="description?" name="description" value={addNewProduct.description} onChange={handleChange} />
-                    <input type="text" placeholder="category?" name="category" value={addNewProduct.category} onChange={handleChange} />
-                    <input type="text" placeholder="image?" name="image" value={addNewProduct.image} onChange={handleChange} />
-                    <input type="number" placeholder="rate?" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
-                    <input type="number" placeholder="count?" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
-                    <button type="submit" onClick={handleOnSubmit}>
-                        submit
-                    </button>
-                </form>
-            </div>
-            <div>
-                <h3>Update a product's price:</h3>
-                <form action="">
-                    <input type="number" placeholder="id?" name="_id" value={updateProduct._id} onChange={handleUpdateChange} />
-                    <input type="number" placeholder="new price?" name="price" value={updateProduct.price} onChange={handleUpdateChange} />
-                    <button type="submit" onClick={updateOneProduct}>
-                        submit
-                    </button>
-                </form>
-            </div>
-            <div>
-                <h3>Delete one product:</h3>
-                <input type="checkbox" id="acceptdelete" name="acceptdelete" checked={checked4}
-                    onChange={(e) => setChecked4(!checked4)} />
-                <button onClick={() => getOneByOneProductPrev()}>Prev</button>
-                <button onClick={() => getOneByOneProductNext()}>Next</button>
-                <button onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
-                {checked4 && (
-                    <div key={product[index]._id}>
-                        <img src={product[index].image} width={30} /> <br />
-                        Id:{product[index]._id} <br />
-                        Title: {product[index].title} <br />
-                        Category: {product[index].category} <br />
-                        Price: {product[index].price} <br />
-                        Rate :{product[index].rating.rate} and Count:
-                        {product[index].rating.count} <br />
-                    </div>
-                )}
-            </div>
+            {!inCredits && <div>
+                <div>
+                    <h3 class="cart-title">Catalog of Products</h3>
+                    <button class="button-background" onClick={() => getAllProducts()}>Show All products</button>
+                    <input type="text" id="message" name="message" placeholder="id" onChange={(e) => getOneProduct(e.target.value)} />
+                    <h3 class="cart-title">Show all available Products.</h3>
+                    <hr></hr>
+                    {viewer1 && <div>Products {showAllItems}</div>}
+                    <hr></hr>
+                </div>
+                <div><h3 class="cart-id">Show one Product by Id:</h3>
+                    {viewer2 && <div>Product: {showOneItem}</div>}
+                </div>
+                <div>
+                    <h3 class="cart-add">Add a new product :</h3>
+                    <form action="">
+                        <input type="number" placeholder="id?" name="_id" value={addNewProduct._id} onChange={handleChange} />
+                        <input type="text" placeholder="title?" name="title" value={addNewProduct.title} onChange={handleChange} />
+                        <input type="number" placeholder="price?" name="price" value={addNewProduct.price} onChange={handleChange} />
+                        <input type="text" placeholder="description?" name="description" value={addNewProduct.description} onChange={handleChange} />
+                        <input type="text" placeholder="category?" name="category" value={addNewProduct.category} onChange={handleChange} />
+                        <input type="text" placeholder="image?" name="image" value={addNewProduct.image} onChange={handleChange} />
+                        <input type="number" placeholder="rate?" name="rate" value={addNewProduct.rating.rate} onChange={handleChange} />
+                        <input type="number" placeholder="count?" name="count" value={addNewProduct.rating.count} onChange={handleChange} />
+                        <button class="button-background" type="submit" onClick={handleOnSubmit}>
+                            submit
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    <h3 class="cart-update">Update a product's price:</h3>
+                    <form action="">
+                        <input type="number" placeholder="id?" name="_id" value={updateProduct._id} onChange={handleUpdateChange} />
+                        <input type="number" placeholder="new price?" name="price" value={updateProduct.price} onChange={handleUpdateChange} />
+                        <button class="button-background" type="submit" onClick={updateOneProduct}>
+                            submit
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    <h3 class="cart-delete">Delete one product:</h3>
+                    <label name="acceptdelete">Check to complete action: </label>
+                    <input type="checkbox" id="acceptdelete" name="acceptdelete" checked={checked4}
+                        onChange={(e) => setChecked4(!checked4)} />
+                    <button class="button-background" onClick={() => getOneByOneProductPrev()}>Prev</button>
+                    <button class="button-background" onClick={() => getOneByOneProductNext()}>Next</button>
+                    <button class="button-background" onClick={() => deleteOneProduct(product[index]._id)}>Delete</button>
+                    {checked4 && (
+                        <div key={product[index]._id}>
+                            <img src={product[index].image} width={30} /> <br />
+                            Id:{product[index]._id} <br />
+                            Title: {product[index].title} <br />
+                            Category: {product[index].category} <br />
+                            Description: {product[index].description} <br />
+                            Price: {product[index].price} <br />
+                            Rate :{product[index].rating.rate} <br />
+                            Count: {product[index].rating.count} <br /> <br />
+                        </div>
+                    )}
+                </div>
+            </div>}
+            {inCredits && <div>
+                <div>
+                    <h1 class="display-5">this page was made by:</h1>
+                </div>
+                <div class="column">
+                    <h2>zeynep oghan</h2>
+                    <p>zeyoghan@iastate.edu</p>
+                </div>
+                <div class="column">
+                    <h2>alix noble</h2>
+                    <p>design and infrastructure</p>
+                    <p>anoble@iastate.edu</p>
+                </div>
+                <div class="footer" >
+                    SE/ComS319 Construction of User Interfaces, 4/30/2023, Abraham Aldaco
+                </div>
+                <div>
+                    This is a simulation of a Pokemon Mart. Users are able to buy and update product prices.
+                </div>
+            </div>}
+            <div onClick={() => toggleShopAndCredits()}><button class="button-background">{inCredits ? "Return to Shopping" : "Go to Credits"}</button></div>
         </div>
     ); // return end
 }; // App end

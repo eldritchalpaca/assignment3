@@ -1,0 +1,105 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.margin-lefter {
+  margin-left: 10px;
+}
+
+.required::after {
+  content: "*";
+  color: red;
+}
+
+body {
+  font-family: "Times", sans-serif;
+  font-size: 16px;
+}
+
+.bulba-green {
+  background-color: #E0F2B6;
+  border-color: #31aa31;
+}
+
+.cart-title {
+  color: #31aa31;
+  font-family: "Papyrus";
+}
+
+.cart-id {
+  color: purple;
+  font-family: "Sans Serif";
+}
+
+.cart-add {
+  color: forestgreen;
+  font-family: "Helvetica";
+}
+
+.cart-update {
+  color: goldenrod;
+  font-family: "Helvetica";
+}
+
+.cart-delete {
+  color: maroon;
+  font-family: "Helvetica";
+}
+
+.navbar {
+  background-color: #02022c;
+}
+
+.navtitle {
+  background-color: #02022c;
+  color: white;
+  font-size: x-large;
+  font-family: Georgia, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#margin-wrangler {
+  margin-top: 20px;
+}
+
+.button-background {
+  background-color: palevioletred;
+}
+
+* {
+  background-color: #edf7f7;
+}

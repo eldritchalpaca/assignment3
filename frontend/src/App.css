@@ -36,3 +36,70 @@
     transform: rotate(360deg);
   }
 }
+
+.margin-lefter {
+  margin-left: 10px;
+}
+
+.required::after {
+  content: "*";
+  color: red;
+}
+
+body {
+  font-family: "Times", sans-serif;
+  font-size: 16px;
+}
+
+.bulba-green {
+  background-color: #E0F2B6;
+  border-color: #31aa31;
+}
+
+.cart-title {
+  color: #31aa31;
+  font-family: "Papyrus";
+}
+
+.cart-id {
+  color: purple;
+  font-family: "Sans Serif";
+}
+
+.cart-add {
+  color: forestgreen;
+  font-family: "Helvetica";
+}
+
+.cart-update {
+  color: goldenrod;
+  font-family: "Helvetica";
+}
+
+.cart-delete {
+  color: maroon;
+  font-family: "Helvetica";
+}
+
+.navbar {
+  background-color: #02022c;
+}
+
+.navtitle {
+  background-color: #02022c;
+  color: white;
+  font-size: x-large;
+  font-family: Georgia, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#margin-wrangler {
+  margin-top: 20px;
+}
+
+.button-background {
+  background-color: palevioletred;
+}
+
+* {
+  background-color: #edf7f7;
+}
